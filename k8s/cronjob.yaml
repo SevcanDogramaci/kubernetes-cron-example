@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: kubernetes-cron-example-multiple-binaries-cronjob
+spec:
+  schedule: "*/30 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: kubernetes-cron-example-multiple-binaries
+            image: sevcandog/kubernetes-cron-example-multiple-binaries
+            imagePullPolicy: IfNotPresent
+            command:
+            - ./failed_transaction
+          restartPolicy: OnFailure
